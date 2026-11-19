@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body text-navy-900 antialiased;
+    /* Warm Ivory page background; cards and documents stay white. */
+    background-color: #f7f5ef;
+    color: #202824;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-heading text-navy-900;
+  }
+  ::selection {
+    background-color: #efd0b6;
+    color: #173c35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print: only the proposal document is rendered on paper/PDF.
+   The proposal renders into a dedicated body-level portal container
+   (#proposal-document). In print mode the app shell (#root) is hidden
+   entirely and the portal container is shown — no visibility patching,
+   no per-element hiding of nav/buttons/inputs. */
+#proposal-document {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 13mm;
+  }
+  body {
+    background: #fff !important;
+  }
+  body > #root {
+    display: none !important;
+  }
+  body > #proposal-document {
+    display: block !important;
+  }
+  /* Large sections are allowed to flow across pages — forcing them atomic
+     pushes a nearly-fitting block (e.g. the approval section) wholesale onto
+     a mostly empty extra page. Only small units stay atomic. */
+  #proposal-document h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+  }
+  #proposal-document table {
+    break-inside: auto;
+  }
+  #proposal-document thead {
+    display: table-header-group;
+  }
+  #proposal-document tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  #proposal-document li {
+    break-inside: avoid;
+  }
+  /* The signature block itself is small; keep it atomic so the two signature
+     lines never separate from the approval text. */
+  #proposal-document .signature-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
