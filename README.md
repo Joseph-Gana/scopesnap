@@ -6,6 +6,14 @@ ScopeSnap helps freelancers and small agencies turn client briefs into structure
 
 Instead of manually organizing every client request, users can use AI-assisted brief analysis to identify project requirements, organize deliverables, review potential risks, prepare quotations, and generate proposals.
 
+## Live Demo
+
+**Live Application:** https://scopesnap.klyscape.com/
+
+**GitHub Repository:** https://github.com/Joseph-Gana/scopesnap
+
+Explore the live application and experience AI-assisted brief analysis, project scoping, quotation generation, and proposal creation.
+
 ## Features
 
 - **AI-Powered Brief Analysis** – Analyze client briefs and extract important project requirements.
